@@ -4,6 +4,12 @@
   
     
     <entry>
+      <title><![CDATA[Sources of Hexo]]></title>
+      <url>http://yoursite.com/2016/07/19/Sources-of-Hexo/</url>
+      <content type="html"></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[test]]></title>
       <url>http://yoursite.com/2016/07/19/test/</url>
       <content type="html"></content>
