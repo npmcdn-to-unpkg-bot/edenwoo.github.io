@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>http://yoursite.com/2016/07/19/test/</loc>
+        <lastmod>2016-07-19T09:42:23.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://yoursite.com/2016/07/19/How-to-use-Hexo/</loc>
         <lastmod>2016-07-19T09:10:39.000Z</lastmod>
         <changefreq>weekly</changefreq>

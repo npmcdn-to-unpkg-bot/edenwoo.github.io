@@ -4,6 +4,12 @@
   
     
     <entry>
+      <title><![CDATA[test]]></title>
+      <url>http://yoursite.com/2016/07/19/test/</url>
+      <content type="html"></content>
+    </entry>
+    
+    <entry>
       <title></title>
       <url>http://yoursite.com/2016/07/19/How-to-use-Hexo/</url>
       <content type="html"><![CDATA[<h1 id="How-to-use-Hexo-to-write-and-publish-blog-articles"><a href="#How-to-use-Hexo-to-write-and-publish-blog-articles" class="headerlink" title="How to use Hexo to write and publish blog articles?"></a>How to use Hexo to write and publish blog articles?</h1><h4 id="follow-the-steps-of-the-doc-bellow"><a href="#follow-the-steps-of-the-doc-bellow" class="headerlink" title="follow the steps of the doc bellow:"></a>follow the steps of the doc bellow:</h4><p><a href="https://hexo.io/docs/index.html" target="_blank" rel="external">https://hexo.io/docs/index.html</a></p>
@@ -227,6 +233,12 @@
     
   
   
+    
+    <entry>
+      <title><![CDATA[aboutme]]></title>
+      <url>http://yoursite.com/aboutme/index.html</url>
+      <content type="html"></content>
+    </entry>
     
   
 </search>
