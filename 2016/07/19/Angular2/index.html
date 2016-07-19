@@ -7,13 +7,16 @@
 
     
 
-    <title>aboutme | </title>
+    <title>Resource of Hexo | </title>
     <meta name="author" content="EdenWoo">
+    
+    <meta name="description" content="Angular2###typescript materialhttps://github.com/teppeis/typescript-spec-md
+typescript introTypeScript is Microsoft’s extension of JavaScript that all">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="aboutme"/>
+    <meta property="og:title" content="Resource of Hexo"/>
     <meta property="og:site_name" content="Eden&#39;s Blog"/>
 
     
@@ -204,6 +207,10 @@
         <span class="breadcrumb">Current page(Categories)</span>
         
             
+    
+    
+    <a class="breadcrumb" href="/categories/Angular2/">Angular2</a>
+
 
         
 
@@ -219,22 +226,41 @@
             <div class="article-title">
                 
     
-        <h1>aboutme</h1>
+        <h1>Resource of Hexo</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2016-07-19T09:30:34.000Z"><a href="/aboutme/index.html">2016-07-19</a></time>
+            <time class="pink-link-context" datetime="2016-07-19T09:50:00.000Z"><a href="/2016/07/19/Angular2/">2016-07-19</a></time>
 
             
+    <div class="tags-row">
+        
+            <a href="/tags/Angular2/" class="chip pink lighten-1">Angular2</a>
+        
+    </div>
+
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Angular2"><span class="section table-of-contents-text">Angular2</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#typescript-intro"><span class="section table-of-contents-text">typescript intro</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#my-first-angular2-app"><span class="section table-of-contents-text">my first angular2 app</span></a></li></ol></li></ol></li></ol></li></ol>
 </div>
 
 
             <div class="entry pink-link-context">
-                
+                <hr>
+<h1 id="Angular2"><a href="#Angular2" class="headerlink" title="Angular2"></a>Angular2</h1><p>###typescript material<br><a href="https://github.com/teppeis/typescript-spec-md" target="_blank" rel="external">https://github.com/teppeis/typescript-spec-md</a></p>
+<h3 id="typescript-intro"><a href="#typescript-intro" class="headerlink" title="typescript intro"></a>typescript intro</h3><pre><code>TypeScript is Microsoft’s extension of JavaScript that allows the use of all ES2015 features and adds powerful type checking and object-oriented features.
+</code></pre><ul>
+<li>Angular is a framework for dynamic web applications.</li>
+<li>We are coding Angular using TypeScript, a language that transpiles into JavaScript.</li>
+<li>Components are the basic building blocks of any Angular application.</li>
+<li>We use a custom HTML tag (aka, selector) to show where we want our component to load inside our HTML.</li>
+<li>Our component decorator is what turns our plain TypeScript class into a component.<h4 id="my-first-angular2-app"><a href="#my-first-angular2-app" class="headerlink" title="my first angular2 app"></a>my first angular2 app</h4></li>
+</ul>
+<p>in index.html</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt;</div><div class="line">  &lt;head&gt;</div><div class="line">    &lt;title&gt;Racing App&lt;/title&gt;</div><div class="line">    &lt;meta charset="UTF-8"&gt;</div><div class="line">    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</div><div class="line">    &lt;link rel="stylesheet" href="styles.css"&gt;</div><div class="line"></div><div class="line">    &lt;!-- 1. Load libraries --&gt;</div><div class="line">     &lt;!-- Polyfill(s) for older browsers --&gt;</div><div class="line">    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.0/es6-shim.min.js"&gt;&lt;/script&gt;</div><div class="line"></div><div class="line">    &lt;script src="https://npmcdn.com/zone.js@0.6.12?main=browser"&gt;&lt;/script&gt;</div><div class="line">    &lt;script src="https://npmcdn.com/reflect-metadata@0.1.3"&gt;&lt;/script&gt;</div><div class="line">    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.27/system.js"&gt;&lt;/script&gt;</div><div class="line">    &lt;script src="https://npmcdn.com/typescript@1.8.10/lib/typescript.js"&gt;&lt;/script&gt;</div><div class="line"></div><div class="line">    &lt;!-- </div><div class="line">    2. Configure SystemJS </div><div class="line">    SystemJS is a JavaScript library that allows us to import other libraries.</div><div class="line">    --&gt;</div><div class="line">    &lt;script src="systemjs.config.js"&gt;&lt;/script&gt;</div><div class="line">    </div><div class="line">	&lt;!--This loads our application’s code.--&gt;</div><div class="line">    &lt;script&gt;</div><div class="line">      System.import('app').catch(function(err)&#123; console.error(err);  &#125;);</div><div class="line">    &lt;/script&gt;</div><div class="line">  &lt;/head&gt;</div><div class="line"></div><div class="line">  &lt;!-- 3. Display the application --&gt;</div><div class="line">  &lt;body&gt;</div><div class="line">      &lt;racing-app&gt;Loading...&lt;/racing-app&gt;</div><div class="line">  &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p>in main.ts</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">/*Angular 2 library modules, ES2015 feature used to import functions, objects, or primitives. Components are the basic building blocks of Angular 2 applications. A component controls a portion of the screen.*/</div><div class="line">import &#123; bootstrap &#125; from &apos;@angular/platform-browser-dynamic&apos;;</div><div class="line">import &#123; Component &#125; from &apos;@angular/,core&apos;;</div><div class="line"></div><div class="line">/*Component: A function we will use to create our first component.</div><div class="line">  component is a decorator fucntion</div><div class="line">  a decorator add more behavior to our class from outside the class</div><div class="line">  It must be declared immediately before the class.</div><div class="line">  The decorator turns our plain old JavaScript class into a component*/</div><div class="line">@Component(&#123;</div><div class="line">/*Tselector:he CSS selector for the HTML element where we want the component to load.*/</div><div class="line">  selector: &apos;racing-app&apos;,</div><div class="line">  /*Ttemplate:he content we want to load inside our selector.</div><div class="line">  Curly braces allow us to load in component properties — this is called interpolation.*/</div><div class="line">  template: &apos;&lt;h1&gt;&#123;&#123;heading&#125;&#125;&lt;/h1&gt;&apos;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">class AppComponent &#123;</div><div class="line">/*Inside a TypeScript class, we don’t use the var or letkeywords to declare class properties.*/</div><div class="line">  heading = &quot;Ultra Racing Schedule&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/*bootstrap A function used to instantiate an Angular 2 application.</div><div class="line">We send our component into bootstrap to instantiate an Angular 2 application.*/</div><div class="line">bootstrap(AppComponent);</div></pre></td></tr></table></figure>
             </div>
         </div>
     </div>

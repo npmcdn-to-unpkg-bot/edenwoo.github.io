@@ -7,27 +7,10 @@
     </url>
 
     <url>
-        <loc>http://yoursite.com/2016/07/19/Angular2/</loc>
+        <loc>http://yoursite.com/categories/Angular2/</loc>
         <lastmod>2016-07-19T23:00:28.000Z</lastmod>
         <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://yoursite.com/2016/07/19/hello-world/</loc>
-        <lastmod>2016-07-19T10:32:45.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://yoursite.com/2016/07/19/Sources-of-Hexo/</loc>
-        <lastmod>2016-07-19T10:13:31.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
+        <priority>0.2</priority>
     </url>
 
 </urlset>
