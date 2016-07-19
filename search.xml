@@ -4,12 +4,12 @@
   
     
     <entry>
-      <title><![CDATA[Resource of Hexo]]></title>
+      <title><![CDATA[Angular2 learning]]></title>
       <url>http://yoursite.com/2016/07/19/Angular2/</url>
       <content type="html"><![CDATA[<hr>
 <h1 id="Angular2"><a href="#Angular2" class="headerlink" title="Angular2"></a>Angular2</h1><p>###typescript material<br><a href="https://github.com/teppeis/typescript-spec-md" target="_blank" rel="external">https://github.com/teppeis/typescript-spec-md</a></p>
-<h3 id="typescript-intro"><a href="#typescript-intro" class="headerlink" title="typescript intro"></a>typescript intro</h3><pre><code>TypeScript is Microsoft’s extension of JavaScript that allows the use of all ES2015 features and adds powerful type checking and object-oriented features.
-</code></pre><ul>
+<h3 id="typescript-intro"><a href="#typescript-intro" class="headerlink" title="typescript intro"></a>typescript intro</h3><p>TypeScript is Microsoft’s extension of JavaScript that allows the use of all ES2015 features and adds powerful type checking and object-oriented features.</p>
+<ul>
 <li>Angular is a framework for dynamic web applications.</li>
 <li>We are coding Angular using TypeScript, a language that transpiles into JavaScript.</li>
 <li>Components are the basic building blocks of any Angular application.</li>
