@@ -4,9 +4,10 @@
   
     
     <entry>
-      <title></title>
+      <title><![CDATA[Resource of Hexo]]></title>
       <url>http://yoursite.com/2016/07/19/Sources-of-Hexo/</url>
-      <content type="html"><![CDATA[<h1 id="How-to-use-Hexo-to-write-and-publish-blog-articles"><a href="#How-to-use-Hexo-to-write-and-publish-blog-articles" class="headerlink" title="How to use Hexo to write and publish blog articles?"></a>How to use Hexo to write and publish blog articles?</h1><h4 id="follow-the-steps-of-the-doc-bellow"><a href="#follow-the-steps-of-the-doc-bellow" class="headerlink" title="follow the steps of the doc bellow:"></a>follow the steps of the doc bellow:</h4><p><a href="https://hexo.io/docs/index.html" target="_blank" rel="external">https://hexo.io/docs/index.html</a></p>
+      <content type="html"><![CDATA[<hr>
+<h1 id="How-to-use-Hexo-to-write-and-publish-blog-articles"><a href="#How-to-use-Hexo-to-write-and-publish-blog-articles" class="headerlink" title="How to use Hexo to write and publish blog articles?"></a>How to use Hexo to write and publish blog articles?</h1><h4 id="follow-the-steps-of-the-doc-bellow"><a href="#follow-the-steps-of-the-doc-bellow" class="headerlink" title="follow the steps of the doc bellow:"></a>follow the steps of the doc bellow:</h4><p><a href="https://hexo.io/docs/index.html" target="_blank" rel="external">https://hexo.io/docs/index.html</a></p>
 <h4 id="In-chinese"><a href="#In-chinese" class="headerlink" title="In chinese"></a>In chinese</h4><p><a href="http://zhiho.github.io/2015/09/26/start-hexo1/" target="_blank" rel="external">http://zhiho.github.io/2015/09/26/start-hexo1/</a></p>
 <h4 id="cool-blogs"><a href="#cool-blogs" class="headerlink" title="cool blogs"></a>cool blogs</h4><p><a href="http://moxfive.xyz/" target="_blank" rel="external">http://moxfive.xyz/</a></p>
 ]]></content>
