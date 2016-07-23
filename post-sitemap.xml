@@ -7,6 +7,22 @@
     </url>
 
     <url>
+        <loc>http://yoursite.com/2016/07/23/Angular1%20.x/</loc>
+        <lastmod>2016-07-23T01:18:04.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/2016/07/23/css%20image%20hover%20zoom%20effect/</loc>
+        <lastmod>2016-07-22T23:28:53.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://yoursite.com/2016/07/19/Angular2/</loc>
         <lastmod>2016-07-20T02:23:28.000Z</lastmod>
         <changefreq>weekly</changefreq>

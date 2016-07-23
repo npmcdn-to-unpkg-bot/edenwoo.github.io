@@ -4,6 +4,311 @@
   
     
     <entry>
+      <title><![CDATA[Angular1.x]]></title>
+      <url>http://yoursite.com/2016/07/23/Angular1%20.x/</url>
+      <content type="html"><![CDATA[<h1 id="Angular1-x"><a href="#Angular1-x" class="headerlink" title="Angular1.x"></a>Angular1.x</h1><h2 id="http"><a href="#http" class="headerlink" title="$http"></a>$http</h2><p>useful links: <a href="http://blog.csdn.net/pzxwhc/article/details/43356461" target="_blank" rel="external">http://blog.csdn.net/pzxwhc/article/details/43356461</a></p>
+<p>in service.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">&apos;use strict&apos;;</div><div class="line"></div><div class="line">angular.module(&apos;myApp&apos;)</div><div class="line">  .service(&apos;MyService&apos;, function ($http, $q) &#123;</div><div class="line"></div><div class="line">  //-------get getSomething function BEGIN-------</div><div class="line">     var getSomething = function (param1,param2,param3) &#123;</div><div class="line">         return $q(function (resolve, reject) &#123;</div><div class="line">             $http(&#123;</div><div class="line">                 url: &quot;app/houses/houses.json&quot;,</div><div class="line">                 method: &quot;GET&quot;,</div><div class="line">                 data: &#123;</div><div class="line">                     param1: param1,</div><div class="line">                     param2: param2,</div><div class="line">                     param3: param3</div><div class="line">                 &#125;</div><div class="line">             &#125;).success(function (data, status, headers, config) &#123;</div><div class="line"></div><div class="line">                 resolve(data);</div><div class="line"></div><div class="line">                 /* if the data result have other logic, use here</div><div class="line">                 if (data.Result == true) &#123;</div><div class="line">                     resolve(data);</div><div class="line">                 &#125; else &#123;</div><div class="line">                     reject(data);</div><div class="line">                 &#125;</div><div class="line">                 */</div><div class="line">             &#125;).error(function (data, status, headers, config) &#123;</div><div class="line">             	 /*error hadling*/</div><div class="line">             &#125;);</div><div class="line">         &#125;);</div><div class="line">     &#125;</div><div class="line"> //-------get getSomething function END-------</div><div class="line"></div><div class="line"> //---------return function BEGIN-------------</div><div class="line">  return &#123;</div><div class="line">       getSomething:getSomething</div><div class="line">    &#125;;</div><div class="line"> //---------return function END---------------     </div><div class="line"></div><div class="line"> //---------end of service  BEGIN-------------     </div><div class="line">  &#125;);</div><div class="line"> //---------end of service  END---------------</div></pre></td></tr></table></figure>
+<p>in controller.js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">angular.module(&apos;myApp&apos;)</div><div class="line">//--------------------AppCtrl BEGIN-------------------------</div><div class="line">.controller(&apos;AppCtrl&apos;, function ($scope, MyService) &#123;</div><div class="line">  MyService.getSomething(param1,param2,param3).then(function (result) &#123;</div><div class="line">        $scope.result=result;</div><div class="line">        &#125;, function (err) &#123;</div><div class="line">          /*error handling*/</div><div class="line">        &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="http-explain"><a href="#http-explain" class="headerlink" title="$http explain"></a>$http explain</h3><p>$http服务是只能接受一个参数的函数，这个参数是一个对象，包含了用来生成HTTP请求的配置内容。这个函数返回一个promise对象，具有success和error两个方法。例如代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$http(&#123;</div><div class="line">   method:&quot;GET&quot;,</div><div class="line">   url:&apos;/xx/xx&apos;</div><div class="line">&#125;).success(function(data,status,headers,config)&#123;</div><div class="line">//当相应准备就绪时调用</div><div class="line">&#125;).error(function(data,status,headers,config)&#123;</div><div class="line">//当响应错误状态返回时调用</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>这个方法实际上返回了一个promise对象。当promise返回的时候，我们可以将$http方法的运行结果当作变量返回。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var promise = $http(&#123;</div><div class="line">    method = &apos;GET&apos;,</div><div class="line">    url:&apos;/xx/xx&apos;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>由于$http方法返回一个promise对象，我们可以在响应返回的时候用then方法来处理回调。如果使用then方法，可以得到一个特殊的参数，它代表了相应对象的成功或者失败信息，还可以接受两个可选的函数作为参数。或者使用success和error进行回调代替。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">promise.then(function(resp)&#123;</div><div class="line">//resp是一个响应对象</div><div class="line">&#125;,function(resp)&#123;</div><div class="line">//带有错误信息的resp</div><div class="line">&#125;)；</div><div class="line"></div><div class="line">或者使用success/error方法：</div><div class="line">promise.success(function(data,status,headers,config)&#123;</div><div class="line">   //处理成功的响应</div><div class="line">&#125;);</div><div class="line">promise.error(function(data,status,headers,config)&#123;</div><div class="line">    //处理非成功的响应</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>如果响应码在200–299之间，会认为响应是成功的，success回调将被调用，否则Error回调会被调用。注意：如果响应的结果是重定向，XMLHttpRequest会跟进这个重定向。</p>
+<p>快捷方法：<br>$http服务提供了一些顺手快捷的方法供我们使用，这些方法简化了复杂的设置，只需要提供URL和HTTP方法（或者POST或PUT请求中包含的数据）即可。<br>用这些快捷的方法，可以将上面的$http的GET请求修改成：<br>$http.get(‘/xx/xx’);</p>
+<p>1.get()<br>这个方法是发送GET请求的快捷方式。get()可以接受两个参数—url（相对或者绝对）config(可选，对象)。get()方法返回HttpPromise对象。<br>2.delete()<br>和上面的一样，但是发送的是delete请求。<br>3.head()<br>和上面的一样，但是发送的是HEAD请求<br>4.jsonp()<br>和上面的一样。<br>5.post()<br>这是用来发送post()请求的快捷方式<br>post请求可以接受3个参数。url，data，config。同样返回一个HttpPromise对象<br>6.put()<br>和post一样，同样接受3个参数请求</p>
+<p>二.设置对象<br>我们把$http当作函数来调用时，需要传入一个设置对象，用来说明如何构造XHR对象。例如，下面的$http当作函数来调用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$http(&#123;</div><div class="line">    method:&apos;GET&apos;,</div><div class="line">    url:&apos;/xx/xx&apos;,</div><div class="line">    params:&#123;</div><div class="line">       &apos;username&apos;:&apos;user&apos;,</div><div class="line">    &#125;            </div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>method：即是我们设置的http请求方式<br>params：json数据即可。<br>data：这个对象将会被当作消息体发送给服务器的数据。通常在发送post请求时使用。例如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var blob = new Blob([&apos;Hello world&apos;],&#123;&apos;text&apos;:&apos;abc&apos;&#125;);</div><div class="line">$http(&#123;</div><div class="line">    method = &apos;post&apos;,</div><div class="line">    url:&apos;/&apos;,</div><div class="line">    data:blob</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>timeout:可以指定毫秒，在指定的毫秒数后执行。</p>
+<p>三.响应对象<br>AngularJs传递给then()方法的响应对象包含4个属性<br>data（字符串或者对象）<br>这个数据代表转换过后的响应体（如果定义了转换的话）<br>status（数值型）<br>响应HTTP状态码</p>
+<p>四.缓存HTTP请求<br>默认情况下，$http服务不会对请求进行本地缓存，在发送单独的请求时，我们可以通过向$http请求传入一个布尔值或者缓存实例来启用缓存。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$http.get(&apos;/xx/xx&apos;,&#123;cache:true&#125;)</div><div class="line">.success(function(data)&#123;&#125;)</div><div class="line">.error(function(data)&#123;&#125;);</div></pre></td></tr></table></figure></p>
+<p>第一次发送请求的时候，$http服务会向/xx/xx发送一个GET请求。第二次同发出一个GET请求的时候，$http服务会从缓存中取回请求结果，而不会真的发送一个HTTP GET请求。<br>由于设置了启动缓存，AngularJs默认会使用$cacheFactory。这个服务是AngularJs在启动时自动创建的。如果想要对AngularJs使用的缓存进行更多的自定义控制，可以传入一个自定义的缓存实例代替true。<br>例如，可以使用LRU等缓存。</p>
+<p>五.拦截器<br>任何时候我们要是想为请求添加全局变量，例如身份验证，错误处理等，在请求发送给服务器之前或者从服务器返回时对其拦截，是比较好的实现手段。<br>例如对于身份验证，如果服务器返回401状态码，我们会希望将用户重定向到登录界面。<br>AngularJs通过对拦截器提供了一个从全局层面对响应进行处理的途径。<br>在前端里有拦截器，听起来高大上，其实就是$http服务的一个中间件，用来向应用的业务流程中注入新的逻辑。<br>拦截器的核心是服务工厂，通过向$httpProvider.interceptors数组中添加服务工厂，在$httpProvider中进行注册。<br>一共有4种拦截器。2种成功拦截器，2种失败拦截器。<br>request：<br>response：<br>requestError：<br>responseError：<br>调用模块的.factory()方法来来创建拦截器，可以在服务中添加一种或者多种拦截器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">angular.module(&apos;myApp&apos;,[])</div><div class="line">.factory(&apos;myInterceptor&apos;,function($q)&#123;</div><div class="line">    var interceptor = &#123;</div><div class="line">        &apos;request&apos;:function(config)&#123;</div><div class="line">             //成功的请求方法</div><div class="line">             return config;</div><div class="line">        &#125;,</div><div class="line">        &apos;response&apos;:function(response)&#123;</div><div class="line">             //响应成功</div><div class="line">             return response;</div><div class="line">         &#125;</div><div class="line">         &apos;requestError&apos;:function(rejection)&#123;</div><div class="line">              //请求发生了错误，如果能从错误中恢复，可以返回一个请求或promise。</div><div class="line">              return response;</div><div class="line">              //或者，可以通过返回一个rejection来阻止下一步</div><div class="line">              //return $q.reject(rejection);</div><div class="line">         &#125;</div><div class="line">        &apos;responseError&apos;:function(rejection)&#123;</div><div class="line">              //请求发生了错误，如果能从错误中恢复，可以返回一个请求或promise。</div><div class="line">              return response;</div><div class="line">              //或者，可以通过返回一个rejection来阻止下一步</div><div class="line">              //return $q.reject(rejection);</div><div class="line">        &#125;</div><div class="line">    &#125;;    </div><div class="line">    reutrn interceptor;</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>然后，我们需要使用$httpProvider在.config函数中注册拦截器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">angular.module(&apos;myApp&apos;,[])</div><div class="line">.config(function($httpProvider)&#123;</div><div class="line">    $httpProvider.interceptors.push(&apos;myInrerceptor&apos;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h2 id="resource"><a href="#resource" class="headerlink" title="$resource"></a>$resource</h2><p>link: <a href="http://beginor.github.io/2015/03/07/connect-web-api-controller-with-angular-resource.html" target="_blank" rel="external">http://beginor.github.io/2015/03/07/connect-web-api-controller-with-angular-resource.html</a><br><a href="http://www.cnblogs.com/liulangmao/p/3906721.html" target="_blank" rel="external">http://www.cnblogs.com/liulangmao/p/3906721.html</a></p>
+<h4 id="in-service-js"><a href="#in-service-js" class="headerlink" title="in service.js"></a>in service.js</h4><p>url REST 服务的地址,如果URL有参数,则在参数名之前添加 :,比如： /user/:username ;<br>paramDefaults ， 用 json 形式表示的 url 参数的默认值， 比如上面的 /user/:username ， 可以设置默认值为： { username: ‘anonymous’ } ,则默认会生成下面的 URL： /user/anonymous； 如果参数的默认值是函数， 在请求时会执行函数以求得默认值；如果参数值是以 @ 开头的， 则表示要从请求发送的 json 对象中提取对应的属性值， 比如参数默认值为 { username: ‘@username’ }， 则会讲发送对象的 username 属性填充到 URL 中；<br>actions 额外的 HTTP 动作， 具体请参考 $http.config;<br>options 可选项， 只支持 stripTrailingSlashes, 配置是否将 URL 结尾的 / 移除；<br>$resource 返回的对象默认支持下列动作：</p>
+<p>{<br>  ‘get’:    {method:’GET’},<br>  ‘save’:   {method:’POST’},<br>  ‘query’:  {method:’GET’, isArray:true},<br>  ‘remove’: {method:’DELETE’},<br>  ‘delete’: {method:’DELETE’}<br>};</p>
+<p>一、HTTP GET类型的方法<br>  ①GET请求：  get(params,successFn,errrorFn)<br>   不定义具体的参数，get()请求通常被用来获取单个资源。</p>
+<p>   //GET /api/users<br>   User.get(function(resp){<br>    //处理成功</p>
+<p>   },function(err){<br>    //处理错误</p>
+<p>   });</p>
+<p>  如果参数中传入了具名参数（我们例子中的参数是id），那么get()方法会向包含id的URL发送请求：<br>    //发起一个请求：GET–&gt;/api/users/123<br>    User.get({id:’1234’},function(resp){<br>       //success<br>    },function(error){<br>       //fail<br>    });</p>
+<p>  ②QUERY 请求：query向指定URL发送一个GET请求，并期望返回一个JSON格式的资源对象集合。<br>  //发起一个请求<br>  User.query(function(users){<br>    //读取集合中的第一个用户<br>    var user=users[0];<br>  });</p>
+<p>  query()和get()方法之间唯一的区别是AngularJS期望query()方法返回数组。  </p>
+<p>二、非HTTP GET类型的方法    </p>
+<ol>
+<li><p>save(params, payload, successFn, errorFn)<br>save方法向指定URL发送一个POST请求，并用数据体来生成请求体。save()方法用来在服务器上生成一个新的资源。 payload:代表请求发送的数据体</p>
+<p>//发送一个请求 with the body {name: ‘Ari’}<br>User.save({},{name:’Ari’},function(resp){</p>
+<p>},function(error){</p>
+<p>});</p>
+<ol>
+<li>delete(params, payload, successFn, errorFn)<br>delete方法会向指定URL发送一个DELETE请求，并用数据体来生成请求体。它被用来在服务器上删除一个实例：   </li>
+</ol>
+<p>// DELETE /api/users<br>User.delete({}, {<br>   id: ‘123’<br>}, function(response) {<br>// 处理成功的删除响应<br>}, function(response) {<br>// 处理非成功的删除响应<br>});</p>
+</li>
+<li><p>remove(params, payload, successFn, errorFn)<br>remove方法和delete()方法的作用是完全相同的，它存在的意义是因为delete是JavaScript的保留字，在IE浏览器中会导致额外的问题。  </p>
+<p>// 发起一个请求：<br>// DELETE /api/users<br>User.remove({}, {<br>id: ‘123’<br>}, function(response) {<br>// 处理成功的删除响应<br>}, function(response) {<br>// 处理非成功的删除响应<br>});</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">&apos;use strict&apos;;</div><div class="line"></div><div class="line">angular.module(&apos;myApp&apos;)</div><div class="line">.service(&apos;MyService&apos;, function ($resource) &#123;</div><div class="line"></div><div class="line">//=============$resource method BEGIN================</div><div class="line">  //服务配置方法：$resource(url，[paramDefaults]，[ actions]);</div><div class="line">  return  $resource(</div><div class="line">    //------url BEGIN----------------</div><div class="line">    &apos;/api/user/:userId/card/:cardId&apos;,</div><div class="line">    //------url END------------------</div><div class="line"></div><div class="line">    //------paramDefaults BEGIN------</div><div class="line">    &#123;</div><div class="line">      userId:123,</div><div class="line">      cardId:&apos;@id&apos;</div><div class="line">    &#125;,</div><div class="line">    //------paramDefaults END--------</div><div class="line"></div><div class="line">    //-------actions BEGIN----------</div><div class="line">    //扩展方法</div><div class="line">    &#123;</div><div class="line">      update:</div><div class="line">      &#123;</div><div class="line">        method:&apos;PUT&apos;</div><div class="line">      &#125;,</div><div class="line"></div><div class="line">      getSomething:</div><div class="line">      &#123;</div><div class="line">        method:&apos;GET&apos;, //POST</div><div class="line">        url:&apos;&apos;,</div><div class="line">        params:&#123;</div><div class="line">          charge:true</div><div class="line">        &#125;,</div><div class="line">        isArray:boolean,</div><div class="line">        transformRequest:函数或者函数数组</div><div class="line">        transformResponse:函数或者函数数组</div><div class="line">        cache:布尔型或缓存对象</div><div class="line">        timeout:数值或promise对象</div><div class="line">        withCredentials:布尔类型</div><div class="line">        responseType:字符串，用来设置XMLHttpRequestResponseType属性</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  //--------actions END--------------</div><div class="line">);</div><div class="line">//================$resource method END================</div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="in-controller-js"><a href="#in-controller-js" class="headerlink" title="in controller.js"></a>in controller.js</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">angular.module(&apos;myApp&apos;)</div><div class="line">.controller(&apos;AppCtrl&apos;, function ($scope, MyService) &#123;</div><div class="line">  //--------query BEGIN--------------</div><div class="line"></div><div class="line">  MyService.query(function(data)&#123;</div><div class="line">    // play with data in the call back;</div><div class="line">    $scope.data=data;</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    //使用 promise 风格的回调函数， 比如：</div><div class="line">    // get all categories with promise</div><div class="line">    categories.query().promise.then(function(data) &#123;</div><div class="line">        // play with data in promise.then</div><div class="line">    &#125;)</div><div class="line">    .fail(function(http) &#123;</div><div class="line">        // show http error here.</div><div class="line">    &#125;);</div><div class="line">  //--------get BEGIN--------------</div><div class="line">  // get one category</div><div class="line">  var cat = categories.get(&#123;id: 1&#125;, function() &#123;</div><div class="line">      cat.Description = &apos;a nice description&apos;;</div><div class="line">      cat.$update();</div><div class="line">  &#125;);</div><div class="line">  //--------get END--------------</div><div class="line">  //--------query END--------------</div><div class="line"></div><div class="line">  //--------query END--------------</div><div class="line">  //--------query END--------------</div><div class="line"></div><div class="line">  //--------query END--------------</div><div class="line">  //--------query END--------------</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h1 id="how-to-use-MarkDown"><a href="#how-to-use-MarkDown" class="headerlink" title="how to use MarkDown"></a>how to use MarkDown</h1><p><a href="https://guides.github.com/features/mastering-markdown/" target="_blank" rel="external">https://guides.github.com/features/mastering-markdown/</a></p>
+<h1 id="angular-ionic-learning"><a href="#angular-ionic-learning" class="headerlink" title="angular_ionic_learning"></a>angular_ionic_learning</h1><h1 id="how-to-filter-an-array-filter-the-params-with-javascript"><a href="#how-to-filter-an-array-filter-the-params-with-javascript" class="headerlink" title="how to filter an array(filter the params) with javascript."></a>how to filter an array(filter the params) with javascript.</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$scope.removeItem=function(itemKey)&#123;</div><div class="line">  //filter out the keys whose key is not equal to itemkey.</div><div class="line">  $scope.keys=$scope.keys.filter(function(key)&#123;</div><div class="line">    return(key !== itemKey);</div><div class="line">  &#125;);</div><div class="line">  $cookies.remove(itemKey);</div><div class="line">&#125;</div><div class="line">```  </div><div class="line"># iterate all the key value pairs in array</div></pre></td></tr></table></figure>
+<p>angular.forEach(cookies, function (v, k) {<br>      $scope.keys.push(v);<br>    });</p>
+<pre><code>angular.forEach(cookies, function (v, k) {
+  $scope.keys.push(v);
+});
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># $resource service</div></pre></td></tr></table></figure>
+<p>.controller(‘ProfileCtrl’, function ($scope, UserService, ResourceService) {<br>    console.log(“testService BEGIN”);<br>    ResourceService.query(function (result) {<br>        console.log(result);<br>        $scope.datas = result;<br>    });<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># pass data use factory</div></pre></td></tr></table></figure></p>
+<p>//——————– Service BEGIN——————<br>//inspect all our http call,<br>.factory(‘UserInfoService’, function () {<br>    var info = {};</p>
+<pre><code>var setInfo=function(i){
+    info = i;
+}
+
+var getInfo = function () {
+    return info;
+}
+return {
+    setInfo: setInfo,
+    getInfo:getInfo
+};
+</code></pre><p>})<br> //——————– Service END——————</p>
+<p>  UserInfoService.setInfo(info);<br>   $scope.data = UserInfoService.getInfo();</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"># rootscope 广播</div><div class="line">Instead of having your menu in $rootScope, you could use event to warn your menu that the user has logged in and that he should reload itself.</div><div class="line"></div><div class="line">On LoginController</div></pre></td></tr></table></figure>
+<p>$rootScope.$broadcast(‘userLoggedIn’);<br>On MainController</p>
+<p>$rootScope.$on(‘userLoggedIn’, function () {<br>    //Code to apply modification to your menu<br>});<br>If you have to pass parameters, you can use the second argument of $broadcast method like this :</p>
+<p>$rootScope.$broadcast(‘userLoggedIn’, {key: ‘value’});</p>
+<p>$rootScope.$on(‘userLoggedIn’, function (params) {<br>    console.log(params.key); //value<br>});<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"># angular localstorage-ngstorage</div><div class="line"></div><div class="line">link:http://ngmodules.org/modules/ngStorage</div><div class="line">bower install ngstorage</div></pre></td></tr></table></figure></p>
+<p>angular.module(‘app’, [<br>    ‘ngStorage’<br>]).controller(‘Ctrl’, function(<br>    $scope,<br>    $localStorage,<br>    $sessionStorage<br>){});</p>
+<p>set item:<br>    $window.sessionStorage.setItem(“isAuthenticated”, true);<br>set json item:<br> var image = document.getElementById(‘img’+id);<br>        json = {<br>          id: id,<br>          img: image.src<br>        }<br> $window.sessionStorage.setItem(id, JSON.stringify(json));</p>
+<p>iterate all the data in the sessionstorage<br>     angular.forEach($window.sessionStorage, function (i, v) {<br>         console.log(“value: “ + i);<br>         console.log(“item: “ + v);<br>    });<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure></p>
+<p>window.addCart = function($scope, $http, $window, $document){</p>
+<pre><code>var getValue = function(){
+    return $window.sessionStorage.length;
+}
+
+var getData = function(){
+  var json = [];
+  $.each($window.sessionStorage, function(i, v){
+    json.push(angular.fromJson(v));
+  });
+  return json;
+}
+
+$scope.images = getData();
+$scope.count = getValue();
+
+$scope.addItem = function(id){
+    var image = document.getElementById(&apos;img&apos;+id);
+    json = {
+      id: id,
+      img: image.src
+    }
+    $window.sessionStorage.setItem(id, JSON.stringify(json));
+    $scope.count = getValue();
+    $scope.images = getData();
+}
+
+$scope.removeItem = function(id){
+  $window.sessionStorage.removeItem(id);
+  $document.
+  $scope.count = getValue();
+  $scope.images = getData();
+  alert(&apos;Removed with Success!&apos;);
+}
+</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line"># sessionStorage with expiry time</div><div class="line"></div><div class="line">Session storage is a very handy tool for caching content fragments retrieved via AJAX. Once we’ve pulled the content once, and stuffed it into session storage, we can access it again quickly without the overhead of a round trip to the server. But what if we want to limit the age of that content, so that it expires before it gets too stale?</div><div class="line"></div><div class="line">A simple answer is to store the content with a timestamp, so that we know just how old it is. We can then compare that timestamp with the current time and see if the content is past its expiration time.</div><div class="line"></div><div class="line">Of course, we can’t store JavaScript objects in session storage, only strings; luckily, we have JSON which is a string representation of JavaScript objects.</div><div class="line"></div><div class="line">Here’s a JavaScript snippet that pulls content from the server via AJAX and saves it in session storage with a timestamp. On subsequent accesses, it gets the content from session storage, and if it hasn’t expired, it displays it straight away without having to go back to the server with AJAX again. Once the expiration time has been reached, the content is discarded and a new AJAX request is made.</div></pre></td></tr></table></figure></p>
+<p>/**</p>
+<ul>
+<li>load the content via AJAX,</li>
+<li><p>and attempt to cache in sessionStorage<br>*/<br>(function() {</p>
+<p>  var hasStorage = (“sessionStorage” in window &amp;&amp; window.sessionStorage),</p>
+<pre><code>storageKey = &quot;yourUniqueStorageKey&quot;,
+now, expiration, data = false;
+</code></pre><p>  try {</p>
+<pre><code>if (hasStorage) {
+    data = sessionStorage.getItem(storageKey);
+    if (data) {
+        // extract saved object from JSON encoded string
+        data = JSON.parse(data);
+
+        // calculate expiration time for content,
+        // to force periodic refresh after 30 minutes
+        now = new Date();
+        expiration = new Date(data.timestamp);
+        expiration.setMinutes(expiration.getMinutes() + 30);
+
+        // ditch the content if too old
+        if (now.getTime() &gt; expiration.getTime()) {
+            data = false;
+            sessionStorage.removeItem(storageKey);
+        }
+    }
+}
+</code></pre><p>  }<br>  catch (e) {</p>
+<pre><code>data = false;
+</code></pre><p>  }</p>
+<p>  if (data) {</p>
+<pre><code>// load data from session storage
+showContent(data.content);
+</code></pre><p>  }<br>  else {</p>
+<pre><code>// fallback to AJAX loader
+jQuery.ajax({
+    type : &quot;GET&quot;,
+    url : your_ajax_url,
+    dataType : &quot;html&quot;,
+    data : { action: &quot;your-ajax-action&quot; },
+    success : function(content, status, xhr) {
+        // save in session storage if available
+        if (hasStorage) {
+            try {
+                sessionStorage.setItem(storageKey, JSON.stringify({
+                    timestamp: new Date(),
+                    content: content
+                }));
+            }
+            catch (e) {
+                // silently suppress, it doesn&apos;t really matter
+            }
+        }
+
+        // show the new content
+        showContent(content);
+    }
+});
+</code></pre><p>  }<br>})();</p>
+</li>
+</ul>
+<p>/**</p>
+<ul>
+<li>your function for displaying the content</li>
+<li>@param {String} content<br>*/<br>function showContent(content) {<br>  // your code here…<br>}<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># Angular Timeout</div><div class="line">set timeout</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>function Ctrl($scope, $timeout) {<br>    $scope.timeInMs = 0;</p>
+<pre><code>var countUp = function() {
+    $scope.timeInMs+= 500;
+    $timeout(countUp, 500);
+}
+
+$timeout(countUp, 500);
+</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cancel timeout</div></pre></td></tr></table></figure></p>
+<p>yourTimer = $timeout(function() { /<em> … </em>/ }, 5000);<br>$timeout.cancel(yourTimer);</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"># Angular中的$timeOut定时器</div><div class="line"></div><div class="line">非常不幸的一点是，人们似乎常常将AngularJS中的$timeOut()函数看做是一个内置的、无须在意的函数。但是，如果你忘记了$timeOut()的回调函数将会造成非常不好的影响，你可能会因此遇到代码莫名其妙的出现问题，或者无端抛出一个错误甚至是一遍一遍的重复对的你的服务器进行$http请求这些诡异的情形。管理好你的$timeOut定时器的小技巧就是在$destory事件中将它们取消。</div><div class="line"></div><div class="line">和Javascript中原生的setTimeout()以及setInterval()函数不同，AngularJS中的$timeOut()函数会返回一个promise。和其他的promise一样，你可以绑定$timeOut的resolved和rejected时间。然而更重要的是，你可以通过将这个promise传递给$timeOut.cancel()方法来取消掉潜在的定时器。</div><div class="line"></div><div class="line">在一个AngularJS应用中，这一点非常的重要，因为定时器可以结束执行那些不再与应用状态和用户界面相关的代码。最佳情形中，这些过程都会悄悄的发生；在不好的情况下，它会引起不可预测的行为并导致很差的用户体验。为了让应用顺畅的运行，你应该总是把握好你的$timeOut定时器；你需要在相应的控制器和指令接收到$destory事件时调用$timeOut.cancel()方法。</div><div class="line"></div><div class="line">为了更加清楚的说明这点，下面的这个例子将会有一些DOM元素通过ngSwitch/ngSwitchWhen指令来创建或销毁。注意到当$destory事件被触发时(在这里的例子中是位于指令中)，我们将取消当前的定时器：</div></pre></td></tr></table></figure>
+<p>&lt;!doctype html&gt;</p>
+<p><html ng-app="Demo" ng-controller="DemoController"></html></p>
+<p><head><br>    <meta charset="utf-8"></head></p>
+<pre><code>&lt;title&gt;
+    Don&apos;t Forget To Cancel $timeout Timers In Your $destroy Events In AngularJS
+&lt;/title&gt;
+</code></pre><p></p>
+<p><body><br>    <h1><br>        Don’t Forget To Cancel $timeout Timers In Your $destroy Events In AngularJS<br>    </h1><br>    <p><br>        <a href="#" ng-click="toggle()">Toggle Section</a><br>    </p><br>    <div ng-switch="section"><br>        <p ng-switch-when="happy" bn-directive=""><br>            Oh sweet!<br>        </p><br>        <p ng-switch-when="sad" bn-directive=""><br>            Oh noes!<br>        </p><br>    </div><br>        <!-- Load jQuery and AngularJS. --><br>        <script type="text/javascript" src="../../vendor/jquery/jquery-2.0.3.min.js"><br>        </script><br>        <script type="text/javascript" src="../../vendor/angularjs/angular-1.0.7.min.js"><br>        </script><br>        <script type="text/javascript"></p>
+<pre><code>    //为我们的demo创建一个应用模块
+    var app = angular.module( &quot;Demo&quot;, [] );
+    // -------------------------------------------------- //
+    // -------------------------------------------------- //
+    // 定义控制器
+    app.controller(
+        &quot;DemoController&quot;,
+        function( $scope ) {
+            $scope.section = &quot;happy&quot;;
+            //在toggle函数中改变section的值，以此在标记中显示/隐藏不同的部分
+            $scope.toggle = function() {
+
+                if ( $scope.section === &quot;happy&quot; ) {
+
+                    $scope.section = &quot;sad&quot;;
+
+                } else {
+
+                    $scope.section = &quot;happy&quot;;
+                }
+            };
+        }
+    );
+    // -------------------------------------------------- //
+    // -------------------------------------------------- //
+   //定义指令
+    app.directive(
+        &quot;bnDirective&quot;,
+        function( $timeout ) {
+
+                            //将用户界面的事件绑定到$scope上
+            function link( $scope, element, attributes ) {
+
+
+                //当timeout被定义时，它返回一个promise对象
+                var timer = $timeout(
+                    function() {
+
+                        console.log( &quot;Timeout executed&quot;, Date.now() );
+
+                    },
+                    2000
+                );
+                //将resolve/reject处理函数绑定到timer promise上以确保我们的cancel方法能正常运行
+                timer.then(
+                    function() {
+
+                        console.log( &quot;Timer resolved!&quot;, Date.now() );
+
+                    },
+                    function() {
+
+                        console.log( &quot;Timer rejected!&quot;, Date.now() );
+
+                    }
+                );
+                //当DOM元素从页面中被移除时，AngularJS将会在scope中触发$destory事件。这让我们可以有机会来cancel任何潜在的定时器
+                $scope.$on(
+                    &quot;$destroy&quot;,
+                    function( event ) {
+
+                        $timeout.cancel( timer );
+
+                    }
+                );
+
+            }
+            //返回指令的配置
+            return({
+                link: link,
+                scope: false
+            });
+        }
+    );
+&lt;/script&gt;
+</code></pre><p></body><br></html><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line"># inoic nav view</div><div class="line"></div><div class="line">http://ionicframework.com/docs/api/directive/ionNavView/</div><div class="line"></div><div class="line">## Caching</div><div class="line">By default, views are cached to improve performance. When a view is navigated away from, its element is left in the DOM, and its scope is disconnected from the $watch cycle. When navigating to a view that is already cached, its scope is then reconnected, and the existing element that was left in the DOM becomes the active view. This also allows for the scroll position of previous views to be maintained.</div><div class="line"></div><div class="line">Caching can be disabled and enabled in multiple ways. By default, Ionic will cache a maximum of 10 views, and not only can this be configured, but apps can also explicitly state which views should and should not be cached.</div></pre></td></tr></table></figure></p>
+<p>var myApp = angular.module(‘reallyCoolApp’, [‘ionic’]);</p>
+<p>myApp.config(function($ionicConfigProvider) {<br>  $ionicConfigProvider.views.maxCache(0);</p>
+<p>  // note that you can also chain configs<br>  $ionicConfigProvider.backButton.text(‘Go Back’).icon(‘ion-chevron-left’);<br>});<br>```</p>
+</script></body></p>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[CSS3]]></title>
+      <url>http://yoursite.com/2016/07/23/css%20image%20hover%20zoom%20effect/</url>
+      <content type="html"><![CDATA[<hr>
+<h1 id="css-image-hover-zoom-effect"><a href="#css-image-hover-zoom-effect" class="headerlink" title="css image hover zoom effect"></a>css image hover zoom effect</h1><h2 id="in-html-file"><a href="#in-html-file" class="headerlink" title="in html file"></a>in html file</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;item&quot;&gt;</div><div class="line">  &lt;img src=&quot;http://cl.ly/image/0v15321t3W1a/pepsi.jpg&quot; alt=&quot;pepsi&quot; width=&quot;540&quot; height=&quot;548&quot;&gt;</div><div class="line">  &lt;div class=&quot;item-overlay top&quot;&gt;&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<h2 id="in-css-file"><a href="#in-css-file" class="headerlink" title="in css file"></a>in css file</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">* &#123;</div><div class="line">  /*not important*/</div><div class="line">  -moz-box-sizing: border-box;</div><div class="line">  -webkit-box-sizing: border-box;</div><div class="line">  box-sizing: border-box;</div><div class="line">  margin: 0;</div><div class="line">  padding: 0;</div><div class="line">&#125;</div><div class="line">.item &#123;</div><div class="line">  position: relative;</div><div class="line">  border: 1px solid #333;</div><div class="line">  margin: 2%;</div><div class="line">  overflow: hidden;/*important,放大的时候，隐藏多出边框的部分*/</div><div class="line">  width: 540px;</div><div class="line">&#125;</div><div class="line">.item img &#123;</div><div class="line">  max-width: 100%;</div><div class="line">  -moz-transition: all 0.3s; /* For Safari 3.1 to 6.0 */</div><div class="line">  -webkit-transition: all 0.3s;</div><div class="line">  transition: all 0.3s;</div><div class="line">&#125;</div><div class="line">.item:hover img &#123;</div><div class="line">  -moz-transform: scale(1.1);</div><div class="line">  -webkit-transform: scale(1.1);</div><div class="line">  transform: scale(1.1);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="explaination"><a href="#explaination" class="headerlink" title="explaination:"></a>explaination:</h2><p>CSS3 Transitions:CSS3 transitions allows you to change property values smoothly (from one value to another), over a given duration.</p>
+<h4 id="two-steps-to-use-CSS3-Transitions"><a href="#two-steps-to-use-CSS3-Transitions" class="headerlink" title="two steps to use CSS3 Transitions"></a>two steps to use CSS3 Transitions</h4><p>1.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">/*shows a 100px * 100px red &lt;div&gt; element. The &lt;div&gt; element has also specified a transition effect for the width property, with a duration of 2 seconds:</div><div class="line">定义变化前的样式，以及变化的时间*/</div><div class="line">div &#123;</div><div class="line">    width: 100px;</div><div class="line">    height: 100px;</div><div class="line">    background: red;</div><div class="line">    -webkit-transition: width 2s; /* Safari */</div><div class="line">    transition: width 2s;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>2.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">/*The transition effect will start when the specified CSS property (width) changes value.</div><div class="line">Now, let us specify a new value for the width property when a user mouses over the &lt;div&gt; element:</div><div class="line">当鼠标经过的时候，宽度变化*/</div><div class="line">div:hover &#123;</div><div class="line">    width: 300px;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>other example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">div &#123;</div><div class="line">    -webkit-transition: width 2s, height 4s; /* Safari */</div><div class="line">    transition: width 2s, height 4s;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>more detail:<a href="http://www.w3schools.com/css/css3_transitions.asp" target="_blank" rel="external">http://www.w3schools.com/css/css3_transitions.asp</a><br><a href="http://www.alessioatzeni.com/blog/css3-hover-effects/" target="_blank" rel="external">http://www.alessioatzeni.com/blog/css3-hover-effects/</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Resource of Hexo]]></title>
+      <url>http://yoursite.com/2016/07/19/Sources-of-Hexo/</url>
+      <content type="html"><![CDATA[<hr>
+<h1 id="How-to-use-Hexo-to-write-and-publish-blog-articles"><a href="#How-to-use-Hexo-to-write-and-publish-blog-articles" class="headerlink" title="How to use Hexo to write and publish blog articles?"></a>How to use Hexo to write and publish blog articles?</h1><h4 id="follow-the-steps-of-the-doc-bellow"><a href="#follow-the-steps-of-the-doc-bellow" class="headerlink" title="follow the steps of the doc bellow:"></a>follow the steps of the doc bellow:</h4><p><a href="https://hexo.io/docs/index.html" target="_blank" rel="external">https://hexo.io/docs/index.html</a></p>
+<h4 id="In-chinese"><a href="#In-chinese" class="headerlink" title="In chinese"></a>In chinese</h4><p><a href="http://zhiho.github.io/2015/09/26/start-hexo1/" target="_blank" rel="external">http://zhiho.github.io/2015/09/26/start-hexo1/</a></p>
+<h4 id="cool-blogs"><a href="#cool-blogs" class="headerlink" title="cool blogs"></a>cool blogs</h4><p><a href="http://moxfive.xyz/" target="_blank" rel="external">http://moxfive.xyz/</a></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Angular2 learning]]></title>
       <url>http://yoursite.com/2016/07/19/Angular2/</url>
       <content type="html"><![CDATA[<hr>
@@ -31,16 +336,6 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">///&lt;reference path=&quot;../node_modules/angular2/typings/browser.d.ts&quot;/&gt;</div><div class="line">import &#123;bootstrap&#125; from &apos;angular2/platform/browser&apos;;</div><div class="line">import &#123;AppComponent&#125; from &quot;./app.component&quot;;</div><div class="line"></div><div class="line">bootstrap(AppComponent);</div></pre></td></tr></table></figure>
 <p>index.html</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&lt;!doctype&gt;</div><div class="line">&lt;html&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;base href=&quot;/&quot;&gt;</div><div class="line">    &lt;title&gt;Angular 2 Boilerplate&lt;/title&gt;</div><div class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</div><div class="line">    &lt;!-- Load libraries --&gt;</div><div class="line">    &lt;!-- IE required polyfills, in this exact order --&gt;</div><div class="line">    &lt;script src=&quot;node_modules/es6-shim/es6-shim.min.js&quot;&gt;&lt;/script&gt;</div><div class="line">    &lt;script src=&quot;node_modules/systemjs/dist/system-polyfills.js&quot;&gt;&lt;/script&gt;</div><div class="line">    &lt;script src=&quot;node_modules/angular2/es6/dev/src/testing/shims_for_IE.js&quot;&gt;&lt;/script&gt;</div><div class="line">    &lt;script src=&quot;node_modules/angular2/bundles/angular2-polyfills.js&quot;&gt;&lt;/script&gt;</div><div class="line">    &lt;script src=&quot;node_modules/systemjs/dist/system.src.js&quot;&gt;&lt;/script&gt;</div><div class="line">    &lt;script src=&quot;node_modules/rxjs/bundles/Rx.js&quot;&gt;&lt;/script&gt;</div><div class="line">    &lt;script src=&quot;node_modules/angular2/bundles/angular2.js&quot;&gt;&lt;/script&gt;</div><div class="line">    &lt;script src=&quot;node_modules/angular2/bundles/router.dev.js&quot;&gt;&lt;/script&gt;</div><div class="line">    &lt;script src=&quot;node_modules/angular2/bundles/http.js&quot;&gt;&lt;/script&gt;</div><div class="line"></div><div class="line"></div><div class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;src/css/app.css&quot;&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;my-app&gt;Loading...&lt;/my-app&gt;</div><div class="line"></div><div class="line">&lt;script&gt;</div><div class="line">    System.config(&#123;</div><div class="line">        packages: &#123;</div><div class="line">            app: &#123;</div><div class="line">                format: &apos;register&apos;,</div><div class="line">                defaultExtension: &apos;js&apos;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">    System.import(&apos;app/boot&apos;)</div><div class="line">            .then(null, console.error.bind(console));</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Resource of Hexo]]></title>
-      <url>http://yoursite.com/2016/07/19/Sources-of-Hexo/</url>
-      <content type="html"><![CDATA[<hr>
-<h1 id="How-to-use-Hexo-to-write-and-publish-blog-articles"><a href="#How-to-use-Hexo-to-write-and-publish-blog-articles" class="headerlink" title="How to use Hexo to write and publish blog articles?"></a>How to use Hexo to write and publish blog articles?</h1><h4 id="follow-the-steps-of-the-doc-bellow"><a href="#follow-the-steps-of-the-doc-bellow" class="headerlink" title="follow the steps of the doc bellow:"></a>follow the steps of the doc bellow:</h4><p><a href="https://hexo.io/docs/index.html" target="_blank" rel="external">https://hexo.io/docs/index.html</a></p>
-<h4 id="In-chinese"><a href="#In-chinese" class="headerlink" title="In chinese"></a>In chinese</h4><p><a href="http://zhiho.github.io/2015/09/26/start-hexo1/" target="_blank" rel="external">http://zhiho.github.io/2015/09/26/start-hexo1/</a></p>
-<h4 id="cool-blogs"><a href="#cool-blogs" class="headerlink" title="cool blogs"></a>cool blogs</h4><p><a href="http://moxfive.xyz/" target="_blank" rel="external">http://moxfive.xyz/</a></p>
 ]]></content>
     </entry>
     
